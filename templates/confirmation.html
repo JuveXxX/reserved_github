@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Confirmation {% endblock %}
+{% block content %}
+	<div class="container mt-5">
+		<div class="card shadow p-4">
+			<h3 class="text-center mb-3 text-success">Réservation Confirmée !</h3>
+			<p>Merci,<strong>{{ current_user.username }}</strong> !</p>
+
+			<hr>
+
+			<div class="mt-4">
+				<h5>Détails de la réservation:</h5>
+				<p><strong>Film :</strong>{{ seance.film.title }}</p>
+				<p><strong>Salle :</strong>{{ seance.salle }}</p>
+				<p><strong>Horaire :</strong>{{ seance.start_time.strftime('%d/%m/%Y %H:%M') }}</p>
+				<p><strong>Vos sièges :</strong>{{ seats | join(', ') }}</p>
+			</div>
+
+			<div class="text-center mt-4">
+				<a href="{{ url_for('index') }}" class="btn btn-primary">Retour à l'accueil</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
