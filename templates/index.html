@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} <title>Accueil</title> {% endblock %}
+
+{% block content %}
+	<!-- Contenu principal -->
+	<div class="col-md-10 p-4">
+		<div class="row">
+			{% for film in films %}
+				<div class="col-md-4 mb-4">
+					<div class="card h-100">
+						<img src="{{ url_for('static', filename='image/'+ film.affiche) }}" class="card-img-top" alt="{{ film.title}}">
+						<div class="card-body">
+							<h5 class="card-title">{{ film.title }}</h5>
+							<p class="card-text">{{ film.genre }}</p>
+							<a href="{{ url_for('film_detail', film_id=film.id) }}" class="btn btn-primary">Réserver</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div> 	
+	</div>
+{% endblock %}  
