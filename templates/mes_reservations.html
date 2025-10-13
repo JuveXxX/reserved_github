@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Mes Réservations {% endblock %}
+
+{% block content %}
+	<div class="container mt-5">
+		<h3 class="text-center mb-4">Mes Réservations</h3>
+		{% if grouped %}
+			<div class="row">
+				{% for seance_id, info in grouped.items() %}
+					<div class="col-md-6 mb-4">
+						<div class="card-r shadow-sm p-3 h-100">
+							<h5 class="text-primary">{{ info.film }}</h5>
+							<p><strong>Salle :</strong>{{ info.salle }}</p>
+							<p><strong>Horaire :</strong>{{ info.duration }}</p>
+							<p><strong>Vos sièges :</strong>{{ info.seats | join(', ') }}</p>
+
+							<div class="text-end">
+								<form method="POST" action="{{ url_for('annuler-res', seance_id=seance_id) }}">
+									<button type="submit" class="btn btn-outline-danger btn-sm">Annuler</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<div class="text-center mt-5">
+				<p class="text-muted">Vous n'avez pas encore aucune réservation.</p>
+				<a href="{{ url_for('index') }}" class="btn btn-primary">Voir les films</a>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}
