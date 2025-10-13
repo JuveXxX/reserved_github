@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} Accueil {% endblock %}
+
+{% block content %}
+	<div class="container mt-4">
+		<div class="row">
+			<!-- Affiche du film -->
+			<div class="col-md-4">
+				<img src="{{ url_for('static', filename='image/'+film.affiche) }}" class="img-fluid rounded" alt="{{ film.title }}">
+			</div>
+
+			<!-- Info du film -->
+			<div class="col-md-8">
+				<h2>{{ film.title }}</h2>
+				<p>
+					<strong>Genre:</strong>
+					{{ film.genre }}
+				</p>
+				<p>
+					<strong>Durée:</strong>
+					{{ film.duration }} min
+				</p>
+				<p>
+					<strong>Description:</strong>
+					{{ film.description }}
+				</p>
+				{% if film.actors %}
+					<p>
+						<strong>Acteurs:</strong>
+						{{ film.actors }}
+					</p>
+				{% endif %}	
+			</div>	
+		</div>
+
+		<hr>
+
+		<!-- Séances disponibles -->
+		<h4>Séances disponibles</h4>
+		<div class="row">
+			{% for seance in seances %}
+				<div class="col-md-3 mb-3">
+					<div class="card-s h-100 text-center p-2">
+						<p>{{ seance.start_time.strftime('%d/%m/%Y %H:%M') }}
+						</p>
+						<p>Salle: {{ seance.salle.name }}</p>
+						<a href="{{ url_for('reservation', seance_id=seance.id) }}" class="btn btn-primary">Réserver</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>	
+	</div>
+{% endblock %}
