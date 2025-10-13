@@ -1,0 +1,70 @@
+{% extends "base.html" %} 
+
+{% block title %} Réservation {% endblock %}
+
+{% block content %}
+	<div class="container mt-4">
+		<div class="row">
+			<div class="col-md-8">
+				<h3 class="mb-3">{{ seance.film.title }}</h3>
+				<p>
+					<strong>Salle:</strong>
+					{{ seance.salle.name }}
+				</p>
+				<p>
+					<strong>Horaire:</strong>
+					{{ seance.start_time.strftime('%d/%m/%Y %H:%M') }}
+				</p>
+
+				<hr>
+
+				<!-- Plan salle -->
+				<h5>Choississez votre siège:</h5>
+				<div id="seat-map" class="mt-3">
+					{% for row in range(5) %}
+						<div class="seat-row">
+							{% for col in range(8) %}
+								{% set seat_id = chr(65 + row) ~ (col + 1) %}
+								{% if seat_id in reserved_seats %}
+									<div class="seat reserved" data-seat="{{ seat_id }}">{{ seat_id }}</div>
+								{% else %}
+									<div class="seat" data-seat="{{ seat_id }}">{{ seat_id }}</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+
+				<form method="POST" class="mt-4" id="reservation-form">
+					<input type="hidden" name="place" id="selected-seats">
+					<button type="submit" class="btn btn-primary">Confirmer ma réservation</button>
+				</form>
+			</div>
+
+			<!-- Résumé -->
+			<div class="col-md-4">
+				<div class="card p-3">
+					<h5>Résumé</h5>
+					<p>
+						<strong>Film:</strong>
+						{{ seance.film.title }}
+					</p>
+					<p>
+						<strong>Salle:</strong>
+						{{ seance.salle.name }}
+					</p>
+					<p>
+						<strong>Horaire:</strong>
+						{{ seance.start_time.strftime('%d/%m/%Y %H:%M') }}
+					</p>
+					<p>
+						<strong>Siège(s) sélectionné(s):</strong>
+						<span id="selected-list">Aucun</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
