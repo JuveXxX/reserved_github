@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}CinéMax | Connexion{% endblock %}
+{% block content %}
+	<div class="row justify-content-center mt-5">
+		<div class="col-md-5">
+			<div class="card shadow p-4">
+				<h3 class="text-center mb-4">Connexion</h3>
+				<form method="POST">
+					<div class="mb-3">
+						<input type="email" name="email" class="form-control" placeholder="Email" required>
+					</div class="mb-3">
+					<div>
+						<input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+					</div class="mb-3">
+					<button type="submit" class="btn btn-primary w-100">Se connecter</button>	
+				</form>
+				<p class="text-center mt-3">
+					Pas encore de compte ? <a href="{{ url_for('register') }}"></a>
+				</p>
+			</div>
+		</div>
+	</div>	
+{% endblock %}
