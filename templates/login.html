@@ -1,5 +1,9 @@
-{% extends "base.html" %}
-{% block title %}CinéMax | Connexion{% endblock %}
+<title>{% block title %}CinéMax | Connexion{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 {% block content %}
 	<div class="row justify-content-center mt-5">
 		<div class="col-md-5">
